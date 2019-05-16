@@ -20,4 +20,19 @@ public class Libyuv {
                                          int width, int height);
 
 
+    public native static void I420ToNV21(
+            byte[] src_y_Buffer,int src_stride_y,
+            byte[] src_u_Buffer,int src_stride_u,
+            byte[] src_v_Buffer,int src_stride_v,
+            byte[] dst_y_Buffer,int dst_stride_y,
+            byte[] dst_uv_Buffer,int dst_stride_uv,
+            int width, int height);
+
+    public native static void I420ToARGB(
+            byte[] src_y_Buffer,int src_stride_y,
+            byte[] src_u_Buffer,int src_stride_u,
+            byte[] src_v_Buffer,int src_stride_v,
+            byte[] dst_Buffer,int dst_stride,
+            int width, int height);
+
 }
