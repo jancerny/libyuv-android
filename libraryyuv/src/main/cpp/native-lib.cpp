@@ -195,8 +195,8 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
             v_src, src_stride_v,
             pixel_stride_uv,
             dst_frame, width,
-            dst_frame + y_plane_length, width / 2,
-            dst_frame + y_plane_length + uv_plane_length, width / 2,
+            dst_frame + y_plane_length, width,
+            dst_frame + y_plane_length + uv_plane_length, width,
             width, height
     );
 
