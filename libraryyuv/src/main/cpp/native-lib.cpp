@@ -188,16 +188,15 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
             +      reinterpret_cast<uint8_t*>(env->GetDirectBufferAddress(src_v_Buffer));
 
     uint8_t *dst_frame = (uint8_t *) env->GetByteArrayElements(dst_buffer, 0);
-    std::unique_ptr<uint8_t[]> buffer(dst_frame);
 
     libyuv::Android420ToI420(
             y_src, src_stride_y,
             u_src, src_stride_u,
             v_src, src_stride_v,
             pixel_stride_uv,
-            buffer.get(), width,
-            buffer.get() + y_plane_length, width / 2,
-            buffer.get() + y_plane_length + uv_plane_length, width / 2,
+            dst_frame, width,
+            dst_frame + y_plane_length, width / 2,
+            dst_frame + y_plane_length + uv_plane_length, width / 2,
             width, height
     );
 
