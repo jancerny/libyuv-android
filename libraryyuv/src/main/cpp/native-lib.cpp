@@ -171,26 +171,30 @@ JNIEXPORT
 JNICALL
 void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
         JNIEnv *env, jclass *jcls,
-        jbyteArray src_y_Buffer, jint src_stride_y,
-        jbyteArray src_u_Buffer, jint src_stride_u,
-        jbyteArray src_v_Buffer, jint src_stride_v,
+        jobject src_y_Buffer, jint src_stride_y,
+        jobject src_u_Buffer, jint src_stride_u,
+        jobject src_v_Buffer, jint src_stride_v,
         jint pixel_stride_uv,
         jbyteArray dst_y_Buffer, jint dst_stride_y,
         jbyteArray dst_u_Buffer, jint dst_stride_u,
         jbyteArray dst_v_Buffer, jint dst_stride_v,
         jint width, jint height) {
 
-    uint8_t *src_y_frame = (uint8_t *) env->GetByteArrayElements(src_y_Buffer, 0);
-    uint8_t *src_u_frame = (uint8_t *) env->GetByteArrayElements(src_u_Buffer, 0);
-    uint8_t *src_v_frame = (uint8_t *) env->GetByteArrayElements(src_v_Buffer, 0);
+    uint8_t* const y_src =
+            +      reinterpret_cast<uint8_t*>(env->GetDirectBufferAddress(src_y_Buffer));
+    uint8_t* const u_src =
+            +      reinterpret_cast<uint8_t*>(env->GetDirectBufferAddress(src_u_Buffer));
+    uint8_t* const v_src =
+            +      reinterpret_cast<uint8_t*>(env->GetDirectBufferAddress(src_v_Buffer));
+
     uint8_t *dst_y_frame = (uint8_t *) env->GetByteArrayElements(dst_y_Buffer, 0);
     uint8_t *dst_u_frame = (uint8_t *) env->GetByteArrayElements(dst_u_Buffer, 0);
     uint8_t *dst_v_frame = (uint8_t *) env->GetByteArrayElements(dst_v_Buffer, 0);
 
     libyuv::Android420ToI420(
-            src_y_frame, src_stride_y,
-            src_u_frame, src_stride_u,
-            src_v_frame, src_stride_v,
+            y_src, src_stride_y,
+            u_src, src_stride_u,
+            v_src, src_stride_v,
             pixel_stride_uv,
             dst_y_frame, dst_stride_y,
             dst_u_frame, dst_stride_u,
@@ -199,9 +203,6 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
     );
 
     //remember release
-    env->ReleaseByteArrayElements(src_y_Buffer, (jbyte *) src_y_frame, 0);
-    env->ReleaseByteArrayElements(src_u_Buffer, (jbyte *) src_u_frame, 0);
-    env->ReleaseByteArrayElements(src_v_Buffer, (jbyte *) src_v_frame, 0);
     env->ReleaseByteArrayElements(dst_y_Buffer, (jbyte *) dst_y_frame, 0);
     env->ReleaseByteArrayElements(dst_u_Buffer, (jbyte *) dst_u_frame, 0);
     env->ReleaseByteArrayElements(dst_v_Buffer, (jbyte *) dst_v_frame, 0);

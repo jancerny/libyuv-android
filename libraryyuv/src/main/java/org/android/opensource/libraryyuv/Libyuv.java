@@ -43,9 +43,9 @@ public class Libyuv {
             int width, int height);
 
     public native static void Android420ToI420(
-            byte[] src_y_Buffer,int src_stride_y,
-            byte[] src_u_Buffer,int src_stride_u,
-            byte[] src_v_Buffer,int src_stride_v,
+            Object src_y_Buffer,int src_stride_y,
+            Object src_u_Buffer,int src_stride_u,
+            Object src_v_Buffer,int src_stride_v,
             int pixel_stride_uv,
             byte[] dst_y_Buffer,int dst_stride_y,
             byte[] dst_u_Buffer,int dst_stride_u,
