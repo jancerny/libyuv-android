@@ -175,10 +175,9 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
         jobject src_u_Buffer, jint src_stride_u,
         jobject src_v_Buffer, jint src_stride_v,
         jint pixel_stride_uv,
-        jbyteArray dst_buffer,
-        jint y_plane_length,
-        jint uv_plane_length,
-        jint uv_stride,
+        jbyteArray dst_y_Buffer, jint dst_stride_y,
+        jbyteArray dst_u_Buffer, jint dst_stride_u,
+        jbyteArray dst_v_Buffer, jint dst_stride_v,
         jint width, jint height) {
 
     uint8_t* const y_src =
@@ -188,20 +187,24 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
     uint8_t* const v_src =
             +      reinterpret_cast<uint8_t*>(env->GetDirectBufferAddress(src_v_Buffer));
 
-    uint8_t *dst_frame = (uint8_t *) env->GetByteArrayElements(dst_buffer, 0);
+    uint8_t *dst_y_frame = (uint8_t *) env->GetByteArrayElements(dst_y_Buffer, 0);
+    uint8_t *dst_u_frame = (uint8_t *) env->GetByteArrayElements(dst_u_Buffer, 0);
+    uint8_t *dst_v_frame = (uint8_t *) env->GetByteArrayElements(dst_v_Buffer, 0);
 
     libyuv::Android420ToI420(
             y_src, src_stride_y,
             u_src, src_stride_u,
             v_src, src_stride_v,
             pixel_stride_uv,
-            dst_frame, width,
-            dst_frame + y_plane_length, uv_stride,
-            dst_frame + y_plane_length + uv_plane_length, uv_stride,
+            dst_y_frame, dst_stride_y,
+            dst_u_frame, dst_stride_u,
+            dst_v_frame, dst_stride_v,
             width, height
     );
 
     //remember release
-    env->ReleaseByteArrayElements(dst_buffer, (jbyte *) dst_frame, 0);
+    env->ReleaseByteArrayElements(dst_y_Buffer, (jbyte *) dst_y_frame, 0);
+    env->ReleaseByteArrayElements(dst_u_Buffer, (jbyte *) dst_u_frame, 0);
+    env->ReleaseByteArrayElements(dst_v_Buffer, (jbyte *) dst_v_frame, 0);
 }
 }
