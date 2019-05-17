@@ -48,6 +48,6 @@ public class Libyuv {
             Object src_v_Buffer,int src_stride_v,
             int pixel_stride_uv,
             byte[] dst_buffer,
-            int y_plane_length, int uv_plane_length,
+            int y_plane_length, int uv_plane_length, int uv_stride,
             int width, int height);
 }

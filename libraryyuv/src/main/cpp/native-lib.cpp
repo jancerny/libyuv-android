@@ -178,6 +178,7 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
         jbyteArray dst_buffer,
         jint y_plane_length,
         jint uv_plane_length,
+        jint uv_stride,
         jint width, jint height) {
 
     uint8_t* const y_src =
@@ -195,8 +196,8 @@ void Java_org_android_opensource_libraryyuv_Libyuv_Android420ToI420(
             v_src, src_stride_v,
             pixel_stride_uv,
             dst_frame, width,
-            dst_frame + y_plane_length, width,
-            dst_frame + y_plane_length + uv_plane_length, width,
+            dst_frame + y_plane_length, uv_stride,
+            dst_frame + y_plane_length + uv_plane_length, uv_stride,
             width, height
     );
 
