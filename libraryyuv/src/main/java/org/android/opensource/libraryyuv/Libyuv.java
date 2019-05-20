@@ -35,6 +35,34 @@ public class Libyuv {
             byte[] dst_Buffer,int dst_stride,
             int width, int height);
 
+    public native static void I420ToBGRA(
+            byte[] src_y_Buffer,int src_stride_y,
+            byte[] src_u_Buffer,int src_stride_u,
+            byte[] src_v_Buffer,int src_stride_v,
+            byte[] dst_Buffer,int dst_stride,
+            int width, int height);
+
+    public native static void I420ToABGR(
+            byte[] src_y_Buffer,int src_stride_y,
+            byte[] src_u_Buffer,int src_stride_u,
+            byte[] src_v_Buffer,int src_stride_v,
+            byte[] dst_Buffer,int dst_stride,
+            int width, int height);
+
+    public native static void I420ToRGBA(
+            byte[] src_y_Buffer,int src_stride_y,
+            byte[] src_u_Buffer,int src_stride_u,
+            byte[] src_v_Buffer,int src_stride_v,
+            byte[] dst_Buffer,int dst_stride,
+            int width, int height);
+
+    public native static void I420ToRGB565(
+            byte[] src_y_Buffer,int src_stride_y,
+            byte[] src_u_Buffer,int src_stride_u,
+            byte[] src_v_Buffer,int src_stride_v,
+            byte[] dst_Buffer,int dst_stride,
+            int width, int height);
+
     public native static void I420ToRAW(
             byte[] src_y_Buffer,int src_stride_y,
             byte[] src_u_Buffer,int src_stride_u,

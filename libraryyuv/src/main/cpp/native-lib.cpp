@@ -139,6 +139,126 @@ void Java_org_android_opensource_libraryyuv_Libyuv_I420ToARGB(
 
 JNIEXPORT
 JNICALL
+void Java_org_android_opensource_libraryyuv_Libyuv_I420ToBGRA(
+        JNIEnv *env, jclass *jcls,
+        jbyteArray src_y_Buffer, jint src_stride_y,
+        jbyteArray src_u_Buffer, jint src_stride_u,
+        jbyteArray src_v_Buffer, jint src_stride_v,
+        jbyteArray dst_Buffer, jint dst_stride,
+        jint width, jint height) {
+
+    uint8_t *src_y_frame = (uint8_t *) env->GetByteArrayElements(src_y_Buffer, 0);
+    uint8_t *src_u_frame = (uint8_t *) env->GetByteArrayElements(src_u_Buffer, 0);
+    uint8_t *src_v_frame = (uint8_t *) env->GetByteArrayElements(src_v_Buffer, 0);
+    uint8_t *dst_frame = (uint8_t *) env->GetByteArrayElements(dst_Buffer, 0);
+
+    libyuv::I420ToBGRA(
+            src_y_frame, src_stride_y,
+            src_u_frame, src_stride_u,
+            src_v_frame, src_stride_v,
+            dst_frame, dst_stride,
+            width, height
+    );
+
+    //remember release
+    env->ReleaseByteArrayElements(src_y_Buffer, (jbyte *) src_y_frame, 0);
+    env->ReleaseByteArrayElements(src_u_Buffer, (jbyte *) src_u_frame, 0);
+    env->ReleaseByteArrayElements(src_v_Buffer, (jbyte *) src_v_frame, 0);
+    env->ReleaseByteArrayElements(dst_Buffer, (jbyte *) dst_frame, 0);
+}
+
+JNIEXPORT
+JNICALL
+void Java_org_android_opensource_libraryyuv_Libyuv_I420ToABGR(
+        JNIEnv *env, jclass *jcls,
+        jbyteArray src_y_Buffer, jint src_stride_y,
+        jbyteArray src_u_Buffer, jint src_stride_u,
+        jbyteArray src_v_Buffer, jint src_stride_v,
+        jbyteArray dst_Buffer, jint dst_stride,
+        jint width, jint height) {
+
+    uint8_t *src_y_frame = (uint8_t *) env->GetByteArrayElements(src_y_Buffer, 0);
+    uint8_t *src_u_frame = (uint8_t *) env->GetByteArrayElements(src_u_Buffer, 0);
+    uint8_t *src_v_frame = (uint8_t *) env->GetByteArrayElements(src_v_Buffer, 0);
+    uint8_t *dst_frame = (uint8_t *) env->GetByteArrayElements(dst_Buffer, 0);
+
+    libyuv::I420ToABGR(
+            src_y_frame, src_stride_y,
+            src_u_frame, src_stride_u,
+            src_v_frame, src_stride_v,
+            dst_frame, dst_stride,
+            width, height
+    );
+
+    //remember release
+    env->ReleaseByteArrayElements(src_y_Buffer, (jbyte *) src_y_frame, 0);
+    env->ReleaseByteArrayElements(src_u_Buffer, (jbyte *) src_u_frame, 0);
+    env->ReleaseByteArrayElements(src_v_Buffer, (jbyte *) src_v_frame, 0);
+    env->ReleaseByteArrayElements(dst_Buffer, (jbyte *) dst_frame, 0);
+}
+
+JNIEXPORT
+JNICALL
+void Java_org_android_opensource_libraryyuv_Libyuv_I420ToRGBA(
+        JNIEnv *env, jclass *jcls,
+        jbyteArray src_y_Buffer, jint src_stride_y,
+        jbyteArray src_u_Buffer, jint src_stride_u,
+        jbyteArray src_v_Buffer, jint src_stride_v,
+        jbyteArray dst_Buffer, jint dst_stride,
+        jint width, jint height) {
+
+    uint8_t *src_y_frame = (uint8_t *) env->GetByteArrayElements(src_y_Buffer, 0);
+    uint8_t *src_u_frame = (uint8_t *) env->GetByteArrayElements(src_u_Buffer, 0);
+    uint8_t *src_v_frame = (uint8_t *) env->GetByteArrayElements(src_v_Buffer, 0);
+    uint8_t *dst_frame = (uint8_t *) env->GetByteArrayElements(dst_Buffer, 0);
+
+    libyuv::I420ToRGBA(
+            src_y_frame, src_stride_y,
+            src_u_frame, src_stride_u,
+            src_v_frame, src_stride_v,
+            dst_frame, dst_stride,
+            width, height
+    );
+
+    //remember release
+    env->ReleaseByteArrayElements(src_y_Buffer, (jbyte *) src_y_frame, 0);
+    env->ReleaseByteArrayElements(src_u_Buffer, (jbyte *) src_u_frame, 0);
+    env->ReleaseByteArrayElements(src_v_Buffer, (jbyte *) src_v_frame, 0);
+    env->ReleaseByteArrayElements(dst_Buffer, (jbyte *) dst_frame, 0);
+}
+
+JNIEXPORT
+JNICALL
+void Java_org_android_opensource_libraryyuv_Libyuv_I420ToRGB565(
+        JNIEnv *env, jclass *jcls,
+        jbyteArray src_y_Buffer, jint src_stride_y,
+        jbyteArray src_u_Buffer, jint src_stride_u,
+        jbyteArray src_v_Buffer, jint src_stride_v,
+        jbyteArray dst_Buffer, jint dst_stride,
+        jint width, jint height) {
+
+    uint8_t *src_y_frame = (uint8_t *) env->GetByteArrayElements(src_y_Buffer, 0);
+    uint8_t *src_u_frame = (uint8_t *) env->GetByteArrayElements(src_u_Buffer, 0);
+    uint8_t *src_v_frame = (uint8_t *) env->GetByteArrayElements(src_v_Buffer, 0);
+    uint8_t *dst_frame = (uint8_t *) env->GetByteArrayElements(dst_Buffer, 0);
+
+    libyuv::I420ToRGB565(
+            src_y_frame, src_stride_y,
+            src_u_frame, src_stride_u,
+            src_v_frame, src_stride_v,
+            dst_frame, dst_stride,
+            width, height
+    );
+
+    //remember release
+    env->ReleaseByteArrayElements(src_y_Buffer, (jbyte *) src_y_frame, 0);
+    env->ReleaseByteArrayElements(src_u_Buffer, (jbyte *) src_u_frame, 0);
+    env->ReleaseByteArrayElements(src_v_Buffer, (jbyte *) src_v_frame, 0);
+    env->ReleaseByteArrayElements(dst_Buffer, (jbyte *) dst_frame, 0);
+}
+
+JNIEXPORT
+JNICALL
 void Java_org_android_opensource_libraryyuv_Libyuv_I420ToRAW(
         JNIEnv *env, jclass *jcls,
         jbyteArray src_y_Buffer, jint src_stride_y,
