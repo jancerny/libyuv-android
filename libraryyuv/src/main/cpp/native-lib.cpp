@@ -339,7 +339,14 @@ void Java_org_android_opensource_libraryyuv_Libyuv_ARGBRotate(
 
     uint8_t *argb_src = (uint8_t *) env->GetByteArrayElements(src_argb_Buffer, 0);
     uint8_t *argb_dst = (uint8_t *) env->GetByteArrayElements(dst_argb_Buffer, 0);
-    libyuv::RotationMode rotation_mode = static_cast<libyuv::RotationMode >(rotation);
+    libyuv::RotationMode rotation_mode = libyuv::RotationMode::kRotate0;
+    if (rotation == 90) {
+        rotation_mode = libyuv::RotationMode::kRotate90;
+    } else if (rotation == 180) {
+        rotation_mode = libyuv::RotationMode::kRotate180;
+    } else if (rotation == 270) {
+        rotation_mode = libyuv::RotationMode::kRotate270;
+    }
 
     libyuv::ARGBRotate(
             argb_src, src_stride_argb,
