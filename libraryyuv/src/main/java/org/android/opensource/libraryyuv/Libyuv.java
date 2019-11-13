@@ -81,7 +81,7 @@ public class Libyuv {
             int width, int height);
 
     public native static void ARGBRotate(
-            byte[] src_argb_Buffer,int src_stride_argb,
+            Object src_argb_Buffer,int src_stride_argb,
             byte[] dst_argb_Buffer,int dst_stride_argb,
             int width, int height, int rotation);
 }

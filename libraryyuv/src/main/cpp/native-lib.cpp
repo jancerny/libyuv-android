@@ -5,6 +5,10 @@
 #include <jni.h>
 #include <string>
 #include "libyuv.h"
+#include <android/log.h>
+
+#define  LOG_TAG    "libyuv-android"
+#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 
 extern "C" {
 
@@ -332,12 +336,15 @@ JNIEXPORT
 JNICALL
 void Java_org_android_opensource_libraryyuv_Libyuv_ARGBRotate(
         JNIEnv *env, jclass *jcls,
-        jbyteArray src_argb_Buffer, jint src_stride_argb,
+        jobject src_argb_Buffer, jint src_stride_argb,
         jbyteArray dst_argb_Buffer, jint dst_stride_argb,
         jint src_width, jint src_height,
         jint rotation) {
 
-    uint8_t *argb_src = (uint8_t *) env->GetByteArrayElements(src_argb_Buffer, 0);
+    LOGD("Rotate step 1");
+
+    uint8_t *const argb_src =
+            +reinterpret_cast<uint8_t *>(env->GetDirectBufferAddress(src_argb_Buffer));
     uint8_t *argb_dst = (uint8_t *) env->GetByteArrayElements(dst_argb_Buffer, 0);
     libyuv::RotationMode rotation_mode = libyuv::RotationMode::kRotate0;
     if (rotation == 90) {
@@ -348,14 +355,19 @@ void Java_org_android_opensource_libraryyuv_Libyuv_ARGBRotate(
         rotation_mode = libyuv::RotationMode::kRotate270;
     }
 
+    LOGD("Rotate step 2");
+
     libyuv::ARGBRotate(
             argb_src, src_stride_argb,
             argb_dst, dst_stride_argb,
             src_width, src_height,
             rotation_mode);
 
+    LOGD("Rotate step 3");
+
     //remember release
-    env->ReleaseByteArrayElements(src_argb_Buffer, (jbyte *) argb_src, 0);
     env->ReleaseByteArrayElements(dst_argb_Buffer, (jbyte *) argb_dst, 0);
+
+    LOGD("Rotate done");
 }
 }
